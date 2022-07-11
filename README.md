@@ -13,16 +13,7 @@ npm install --save react-dynamodb-helper
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
-
-import MyComponent from 'react-dynamodb-helper'
-import 'react-dynamodb-helper/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+import * as DynamoDB from 'react-dynamodb-helper';
 ```
 
 ## License
