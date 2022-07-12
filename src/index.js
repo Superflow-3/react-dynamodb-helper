@@ -1,20 +1,22 @@
 import * as AWS from 'aws-sdk'
 import { ConfigurationOptions } from 'aws-sdk'
 
-// export const ExampleComponent = ({ text }) => {
-//   return <div className={styles.test}>Example Component: {text}</div>
-// }
-
-const docClient = new AWS.DynamoDB.DocumentClient();
-
-export const getData = async (region, secret, key, params) => {
+function updateAWSConfigAndGetClient(region, secret, key) {
 
   const configuration: ConfigurationOptions = {
     region: region,
     secretAccessKey: secret,
     accessKeyId: key
   }
+  console.log(configuration);
   AWS.config.update(configuration)
+  return new AWS.DynamoDB.DocumentClient();
+
+}
+
+export const getData = async (region, secret, key, params) => {
+
+  const docClient = updateAWSConfigAndGetClient(region, secret, key);
 
   try {
 
@@ -45,12 +47,7 @@ export const getData = async (region, secret, key, params) => {
 
 export const queryData = async (region, secret, key, params) => {
   
-  const configuration: ConfigurationOptions = {
-    region: region,
-    secretAccessKey: secret,
-    accessKeyId: key
-  }
-  AWS.config.update(configuration)
+  const docClient = updateAWSConfigAndGetClient(region, secret, key);
   
   try {
       
@@ -95,13 +92,7 @@ export const queryData = async (region, secret, key, params) => {
 
 export const scanData = async (region, secret, key, params) => {
 
-  const configuration: ConfigurationOptions = {
-    region: region,
-    secretAccessKey: secret,
-    accessKeyId: key
-  }
-  AWS.config.update(configuration)
-
+  const docClient = updateAWSConfigAndGetClient(region, secret, key);
   try {
     var myPromise = () => (
         new Promise((resolve, reject) => {
@@ -147,12 +138,7 @@ export const scanData = async (region, secret, key, params) => {
 
 export const putData = async (region, secret, key, params) => {
 
-  const configuration: ConfigurationOptions = {
-    region: region,
-    secretAccessKey: secret,
-    accessKeyId: key
-  }
-  AWS.config.update(configuration)
+  const docClient = updateAWSConfigAndGetClient(region, secret, key);
 
   try {
     var myPromise = () => (
@@ -185,13 +171,7 @@ export const putData = async (region, secret, key, params) => {
 
 export const updateData = async (region, secret, key, params) => {
 
-  const configuration: ConfigurationOptions = {
-    region: region,
-    secretAccessKey: secret,
-    accessKeyId: key
-  }
-  AWS.config.update(configuration)
-
+  const docClient = updateAWSConfigAndGetClient(region, secret, key);
 
   try {
       
@@ -223,12 +203,7 @@ export const updateData = async (region, secret, key, params) => {
 
 export const deleteData = async (region, secret, key, params) => {
 
-  const configuration: ConfigurationOptions = {
-    region: region,
-    secretAccessKey: secret,
-    accessKeyId: key
-  }
-  AWS.config.update(configuration)
+  const docClient = updateAWSConfigAndGetClient(region, secret, key);
   
   try {
 

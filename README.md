@@ -13,7 +13,40 @@ npm install --save react-dynamodb-helper
 ## Usage
 
 ```jsx
+
+import React, { useEffect } from 'react'
+
 import * as DynamoDB from 'react-dynamodb-helper';
+
+const App = () => {
+
+
+  const apiCall = async () => {
+
+    var params = {
+      TableName: "Account_Credentials",
+      Key : { 
+          "email" : 'hrushi@megotechnologies.com',
+      }
+    };
+
+    let result = await DynamoDB.getData("ap-XXXX-1", "aws_secret", "aws_access_key", params)
+
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      await apiCall();
+    }
+    fetchData();
+  }, [])
+
+  return <div>Hello DynamoDB Helper</div>
+}
+
+export default App
+
+
 ```
 
 ## License
