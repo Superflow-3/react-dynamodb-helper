@@ -4,25 +4,19 @@ import * as DynamoDB from 'react-dynamodb-helper';
 
 const App = () => {
 
-
-  const apiCall = async () => {
-
-    var params = {
-      TableName: "Account_Credentials",
-      Key : { 
-          "email" : 'hrushi@megotechnologies.com',
-      }
-    };
-
-    let result = await DynamoDB.getData("ap-south-1", "0nCKOcgRf8ibAgmeuRId5iQ1DZ9u5jWNbDPeMH/h", "AKIASUWOWMZOUWTMABMQ", params)
-
-  }
-
   useEffect(() => {
-    async function fetchData() {
-      await apiCall();
+    async function getData() {
+      var params = {
+        TableName: "Account_Credentials",
+        Key : { 
+            "email" : 'hrushi@megotechnologies.com',
+        }
+      };
+  
+      let result = await DynamoDB.getData("ap-south-1", "0nCKOcgRf8ibAgmeuRId5iQ1DZ9u5jWNbDPeMH/h", "AKIASUWOWMZOUWTMABMQ", params)
+  
     }
-    fetchData();
+    getData();
   }, [])
 
   return <div>Hello DynamoDB Helper</div>

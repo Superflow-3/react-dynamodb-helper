@@ -10,6 +10,13 @@
 npm install --save react-dynamodb-helper
 ```
 
+## Dependencies
+
+```bash
+npm install --save aws-sdk
+```
+
+
 ## Usage
 
 ```jsx
@@ -20,32 +27,30 @@ import * as DynamoDB from 'react-dynamodb-helper';
 
 const App = () => {
 
+    useEffect(() => {
+        
+        async function getData() {
+            var params = {
+            TableName: "Account_Credentials",
+            Key : { 
+                "email" : 'hru****@***ies.com',
+            }
+            };
 
-  const apiCall = async () => {
+            // aws_secret and aws_access_key need to have
+            // dynamodb access
+            
+            let result = await DynamoDB.getData("aws_region", "aws_secret", "aws_access_key", params)
 
-    var params = {
-      TableName: "Account_Credentials",
-      Key : { 
-          "email" : 'hrushi@megotechnologies.com',
-      }
-    };
+        }
+        getData();
 
-    let result = await DynamoDB.getData("ap-XXXX-1", "aws_secret", "aws_access_key", params)
-
-  }
-
-  useEffect(() => {
-    async function fetchData() {
-      await apiCall();
-    }
-    fetchData();
-  }, [])
+    }, [])
 
   return <div>Hello DynamoDB Helper</div>
 }
 
 export default App
-
 
 ```
 
