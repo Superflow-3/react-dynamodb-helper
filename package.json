@@ -1,6 +1,6 @@
 {
   "name": "react-dynamodb-helper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A helper component to interface with dynamodb using the AWS SDK, directly from React",
   "author": "superflows-dev",
   "license": "MIT",

@@ -13,7 +13,7 @@ const App = () => {
         }
       };
   
-      let result = await DynamoDB.getData("ap-south-1", "0nCKOcgRf8ibAgmeuRId5iQ1DZ9u5jWNbDPeMH/h", "AKIASUWOWMZOUWTMABMQ", params)
+      let result = await DynamoDB.getData("ap-south-1", "aws_secret", "aws_access_key", params)
   
     }
     getData();
