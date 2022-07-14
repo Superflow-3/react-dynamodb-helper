@@ -16,6 +16,9 @@ npm install --save react-dynamodb-helper
 npm install --save aws-sdk
 ```
 
+## Note
+
+### AWS key pair needs to have DynamoDb privileges
 
 ## Usage
 
@@ -28,7 +31,7 @@ import * as DynamoDB from 'react-dynamodb-helper';
 const App = () => {
 
     useEffect(() => {
-        
+
         async function getData() {
             var params = {
             TableName: "Account_Credentials",
@@ -41,6 +44,34 @@ const App = () => {
             // dynamodb access
             
             let result = await DynamoDB.getData("aws_region", "aws_secret", "aws_access_key", params)
+
+        }
+        getData();
+
+    }, [])
+
+
+    useEffect(() => {
+
+        async function updateData() {
+            var params = {
+                TableName: "Account_Credentials",
+                Key : { 
+                    "email" : 'hru****@***ies.com',
+                },
+                UpdateExpression: "set #otp = :otpVal",
+                ExpressionAttributeNames: {
+                    "#otp": "otp",
+                },
+                ExpressionAttributeValues: {
+                    ":otpVal": "1212"
+                }
+            };
+
+            // aws_secret and aws_access_key need to have
+            // dynamodb access
+            
+            let result = await DynamoDB.updateData("aws_region", "aws_secret", "aws_access_key", params)
 
         }
         getData();
