@@ -8,7 +8,6 @@ function updateAWSConfigAndGetClient(region, secret, key) {
     secretAccessKey: secret,
     accessKeyId: key
   }
-  console.log(configuration);
   AWS.config.update(configuration)
   return new AWS.DynamoDB.DocumentClient();
 
@@ -25,8 +24,6 @@ export const getData = async (region, secret, key, params) => {
 
           docClient.get(params, function(err, data) {
             if (err) {
-              console.log(params)
-              console.log(err)
               resolve(err);
             } else {
               resolve(data);
@@ -58,7 +55,6 @@ export const queryData = async (region, secret, key, params) => {
             var arrItems = [];
             function onQuery(err, data) {
               if (err) {
-                console.log(params)
                 console.log(err); 
                 resolve(err);
               } else {
@@ -68,7 +64,6 @@ export const queryData = async (region, secret, key, params) => {
                 }
                 
                 if (typeof data.LastEvaluatedKey != "undefined") {
-                    console.log("Scanning for more...");
                     params.ExclusiveStartKey = data.LastEvaluatedKey;
                     docClient.scan(params, onQuery);
                 } else {
@@ -103,7 +98,6 @@ export const scanData = async (region, secret, key, params) => {
         
         function onScan(err, data) {
           if (err) {
-            console.log(params)
             console.log(err); 
             resolve(err);
           } else {
@@ -113,7 +107,6 @@ export const scanData = async (region, secret, key, params) => {
             }
             
             if (typeof data.LastEvaluatedKey != "undefined") {
-                console.log("Scanning for more...");
                 params.ExclusiveStartKey = data.LastEvaluatedKey;
                 docClient.scan(params, onScan);
             } else {
@@ -144,12 +137,9 @@ export const putData = async (region, secret, key, params) => {
     var myPromise = () => (
         new Promise((resolve, reject) => {
 
-          // console.log("dynamodb put params");
-          // console.log(params);
           docClient.put(params, function(err, data) {
             console.log({err, data})
             if (err) {
-              console.log(params)
               console.log(err)
               resolve(err);
             } else {
@@ -178,11 +168,8 @@ export const updateData = async (region, secret, key, params) => {
       var myPromise = () => (
           new Promise((resolve, reject) => {
 
-            // console.log("dynamodb update params");
-            // console.log(params);
             docClient.update(params, function(err, data) {
               if (err) {
-                console.log(params)
                 console.log(err)
                 resolve(err);
               } else {
@@ -209,11 +196,8 @@ export const deleteData = async (region, secret, key, params) => {
 
       var myPromise = () => (
           new Promise((resolve, reject) => {
-            // console.log("dynamodb delete params");
-            // console.log(params);
             docClient.delete(params, function(err, data) {
               if (err) {
-                console.log(params)
                 console.log(err)
                 resolve(err);
               } else {
