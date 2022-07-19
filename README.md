@@ -9,6 +9,7 @@
 ```bash
 npm install --save react-dynamodb-helper
 ```
+Then install the dependencies.
 
 ## Dependencies
 
@@ -16,9 +17,46 @@ npm install --save react-dynamodb-helper
 npm install --save aws-sdk
 ```
 
-## Note
+## Configuration
 
-### AWS key pair needs to have DynamoDb privileges
+### AWS Dynamodb
+
+You will need to create table(s) in dynamodb according to your data model.
+
+### AWS Credentials
+
+AWS region, secret and access key form the credentials. These are required to use this package. It is crucial that these credentials are given create, retrieve, update and delete permissions in aws for dynamodb.
+
+You can now review the functionality below.
+
+## Functionality
+
+```jsx
+
+/*
+
+region: aws region
+secret: aws secret
+key: aws access key
+params: query parameters
+
+*/
+
+getData(region, secret, key, params) {}
+
+queryData(region, secret, key, params) {}
+
+scanData(region, secret, key, params) {}
+
+putData(region, secret, key, params) {}
+
+updateData(region, secret, key, params) {}
+
+deleteData(region, secret, key, params) {}
+
+```
+
+
 
 ## Usage
 
